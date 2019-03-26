@@ -1,0 +1,49 @@
+
+plugins {
+	id 'org.springframework.boot' version '1.5.19.RELEASE'
+	id 'java'
+	id 'eclipse'
+}
+
+repositories {
+ 	maven()
+}
+
+configurations.all {
+	exclude module: 'commons-lang'
+	exclude module: 'commons-logging'
+	exclude module: 'log'
+ 	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+}
+
+
+
+//ext['log4j2.version']= "2.11.2"
+
+
+ 
+description = "Spring Boot Custom Log4j2 Logging"
+ 
+
+
+springBoot {
+	mainClass = 'org.springframework.boot.custom.CustomLog4j2Application'
+}
+ 
+
+ dependencies {
+
+ 
+	compile "org.slf4j:slf4j-api"
+	compile ('org.springframework.boot:spring-boot-starter') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' 
+	}
+	 
+	compile 'org.springframework.boot:spring-boot-starter-log4j2' 
+ 
+	compile group: 'com.lmax', name: 'disruptor', version: '3.3.4'
+	
+	 
+}
+
+ 
